@@ -33,5 +33,43 @@ namespace dotnet_bloggr.Controllers
       }
     }
 
+    [HttpGet("{id}")]
+    public ActionResult<Blog> GetById(int id)
+    {
+      try
+      {
+        return Ok(_bs.GetById(id));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
+    [HttpPost]
+    public ActionResult<Blog> Create([FromBody] Blog newBlog)
+    {
+      try
+      {
+        return Ok(_bs.Create(newBlog));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
+    [HttpDelete("{id}")]
+    public ActionResult<Blog> Delete(int id)
+    {
+      try
+      {
+        return Ok(_bs.Delete(id));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
   }
 }

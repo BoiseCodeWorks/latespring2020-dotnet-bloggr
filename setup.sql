@@ -7,3 +7,6 @@
 --   PRIMARY KEY (id)
 -- )
 -- ALTER TABLE blogs DROP description;
+
+
+SELECT * FROM blogs WHERE Id = 7
