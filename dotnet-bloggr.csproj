@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>dotnet_bloggr</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MySqlConnector" Version="0.66.0"/>
+    <PackageReference Include="Dapper" Version="2.0.35"/>
+  </ItemGroup>
+</Project>
