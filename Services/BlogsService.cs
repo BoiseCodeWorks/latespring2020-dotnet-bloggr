@@ -17,6 +17,10 @@ namespace dotnet_bloggr.Services
     {
       return _repo.GetAll();
     }
+    internal IEnumerable<Blog> GetBlogsByUserEmail(string creatorEmail)
+    {
+      return _repo.GetBlogsByUserEmail(creatorEmail);
+    }
 
     internal Blog Create(Blog newBlog)
     {
@@ -43,5 +47,16 @@ namespace dotnet_bloggr.Services
       }
       throw new Exception("Something bad happened...");
     }
+
+    internal Blog Edit(int id, Blog updatedBlog)
+    {
+      Blog foundBlog = GetById(id);
+      //NOTE GetById() is already handling our null checking
+      foundBlog.IsPublished = updatedBlog.IsPublished;
+      foundBlog.Body = updatedBlog.Body;
+      foundBlog.Title = updatedBlog.Title;
+      return _repo.Edit(foundBlog);
+    }
+
   }
 }

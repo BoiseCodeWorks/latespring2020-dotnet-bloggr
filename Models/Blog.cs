@@ -10,5 +10,6 @@ namespace dotnet_bloggr.Models
     public string Title { get; set; }
     public string Body { get; set; }
     public bool IsPublished { get; set; }
+    public string CreatorEmail { get; set; }
   }
 }

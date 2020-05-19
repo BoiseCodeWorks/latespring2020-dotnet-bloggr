@@ -16,7 +16,7 @@ namespace dotnet_bloggr.Repositories
     }
     internal IEnumerable<Blog> GetAll()
     {
-      string sql = "SELECT * FROM blogs";
+      string sql = "SELECT * FROM blogs WHERE isPublished = 1";
       return _db.Query<Blog>(sql);
     }
 
@@ -24,12 +24,18 @@ namespace dotnet_bloggr.Repositories
     {
       string sql = @"
       INSERT INTO blogs
-      (title, body, isPublished)
+      (title, body, isPublished, creatorEmail)
       VALUES
-      (@Title, @Body, @IsPublished);
+      (@Title, @Body, @IsPublished, @CreatorEmail);
       SELECT LAST_INSERT_ID()";
       newBlog.Id = _db.ExecuteScalar<int>(sql, newBlog);
       return newBlog;
+    }
+
+    internal IEnumerable<Blog> GetBlogsByUserEmail(string creatorEmail)
+    {
+      string sql = "SELECT * FROM blogs WHERE creatorEmail = @CreatorEmail";
+      return _db.Query<Blog>(sql, new { creatorEmail });
     }
 
     internal Blog GetById(int id)
@@ -43,6 +49,19 @@ namespace dotnet_bloggr.Repositories
       string sql = "DELETE FROM blogs WHERE id = @Id LIMIT 1";
       int affectedRows = _db.Execute(sql, new { id });
       return affectedRows == 1;
+    }
+
+    internal Blog Edit(Blog blogToUpdate)
+    {
+      string sql = @"
+        UPDATE blogs
+        SET
+          title = @Title,
+          body = @Body,
+          isPublished = @IsPublished
+        WHERE id = @Id LIMIT 1";
+      _db.Execute(sql, blogToUpdate);
+      return blogToUpdate;
     }
   }
 }
