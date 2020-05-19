@@ -17,5 +17,14 @@ namespace dotnet_bloggr.Services
     {
       return _repo.Create(newTagBlog);
     }
+
+    internal string Delete(int id)
+    {
+      if (_repo.Delete(id))
+      {
+        return "Succesfully delorted!";
+      }
+      throw new Exception("Invalid or unable to delete for some reason");
+    }
   }
 }

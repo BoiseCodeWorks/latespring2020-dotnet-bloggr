@@ -11,9 +11,12 @@ namespace dotnet_bloggr.Controllers
   {
     private readonly TagsService _ts;
 
-    public TagsController(TagsService ts)
+    private readonly BlogsService _bs;
+
+    public TagsController(TagsService ts, BlogsService bs)
     {
       _ts = ts;
+      _bs = bs;
     }
 
     [HttpGet]
@@ -29,6 +32,21 @@ namespace dotnet_bloggr.Controllers
         throw;
       }
     }
+
+    [HttpGet("{id}/blogs")]
+    public ActionResult<IEnumerable<TagBlogViewModel>> GetBlogsByTagId(int id)
+    {
+      try
+      {
+        //NOTE We could go request to get the tag, and make sure it exists right here by using the tag service.
+        return Ok(_bs.GetBlogsByTagId(id));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
 
     [HttpPost]
     public ActionResult<Tag> Create([FromBody] Tag newTag)

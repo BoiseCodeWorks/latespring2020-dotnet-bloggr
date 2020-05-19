@@ -12,4 +12,11 @@ namespace dotnet_bloggr.Models
     public bool IsPublished { get; set; }
     public string CreatorEmail { get; set; }
   }
+
+  public class TagBlogViewModel : Blog
+  {
+    public int TagBlogId { get; set; }
+    public string Tag { get; set; }
+  }
+
 }

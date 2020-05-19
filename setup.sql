@@ -15,22 +15,22 @@
 --   PRIMARY KEY (id)
 -- )
 
-CREATE TABLE tagblogs(
-  id INT NOT NULL AUTO_INCREMENT,
-  blogId INT NOT NULL,
-  tagId INT NOT NULL,
-  PRIMARY KEY (id),
+-- CREATE TABLE tagblogs(
+--   id INT NOT NULL AUTO_INCREMENT,
+--   blogId INT NOT NULL,
+--   tagId INT NOT NULL,
+--   PRIMARY KEY (id),
 
-  INDEX (blogId),
+--   INDEX (blogId),
 
-  FOREIGN KEY (blogId)
-    REFERENCES blogs(id)
-    ON DELETE CASCADE,
+--   FOREIGN KEY (blogId)
+--     REFERENCES blogs(id)
+--     ON DELETE CASCADE,
 
-  FOREIGN KEY (tagId)
-    REFERENCES tags(id)
-    ON DELETE CASCADE
-)
+--   FOREIGN KEY (tagId)
+--     REFERENCES tags(id)
+--     ON DELETE CASCADE
+-- )
 -- SELECT * FROM blogs WHERE Id = 7
 
 -- NOTE Execute sql query command with ctrl + alt + e

@@ -21,6 +21,10 @@ namespace dotnet_bloggr.Services
     {
       return _repo.GetBlogsByUserEmail(creatorEmail);
     }
+    internal IEnumerable<TagBlogViewModel> GetBlogsByTagId(int id)
+    {
+      return _repo.GetBlogsByTagId(id);
+    }
 
     internal Blog Create(Blog newBlog)
     {
@@ -47,6 +51,7 @@ namespace dotnet_bloggr.Services
       }
       throw new Exception("Something bad happened...");
     }
+
 
     internal Blog Edit(int id, Blog updatedBlog)
     {

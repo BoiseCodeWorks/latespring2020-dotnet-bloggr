@@ -28,5 +28,18 @@ namespace dotnet_bloggr.Controllers
         throw;
       }
     }
+
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(int id)
+    {
+      try
+      {
+        return Ok(_tbs.Delete(id));
+      }
+      catch (System.Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
   }
 }

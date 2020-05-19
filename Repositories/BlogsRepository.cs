@@ -14,6 +14,7 @@ namespace dotnet_bloggr.Repositories
     {
       _db = db;
     }
+
     internal IEnumerable<Blog> GetAll()
     {
       string sql = "SELECT * FROM blogs WHERE isPublished = 1";
@@ -30,6 +31,20 @@ namespace dotnet_bloggr.Repositories
       SELECT LAST_INSERT_ID()";
       newBlog.Id = _db.ExecuteScalar<int>(sql, newBlog);
       return newBlog;
+    }
+
+    internal IEnumerable<TagBlogViewModel> GetBlogsByTagId(int TagId)
+    {
+      string sql = @"
+        SELECT
+        b.*,
+        t.title As Tag,
+        tb.id AS TagBlogId
+        FROM tagblogs tb
+        INNER JOIN blogs b ON b.id = tb.blogId
+        INNER JOIN tags t ON t.id = tb.TagId
+        WHERE tagId = @TagId AND isPublished = 1";
+      return _db.Query<TagBlogViewModel>(sql, new { TagId });
     }
 
     internal IEnumerable<Blog> GetBlogsByUserEmail(string creatorEmail)
